@@ -1,24 +1,25 @@
-<!-- i want to display the fields of the restaurant with a placeholder -->
 <template>
-  <div class="restaurant-card">
-    <p>Name of restaurant: {{ restaurant.name }}</p>
-    <p>Address: {{ restaurant.address }}</p>
-    <p>Rating: {{ restaurant.rating }}</p>
-    <p>Cuisine: {{ restaurant.cuisine }}</p>
+  <div class="card">
+    <h2>{{ restaurant.name }}</h2>
+    <p><strong>Cuisines:</strong> {{ restaurant.cuisines }}</p>
+    <p><strong>Rating:</strong> {{ restaurant.rating }}</p>
+    <p><strong>Address:</strong> {{ restaurant.address }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      restaurant: {
-        name: 'Hangout',
-        address: 'Delft',
-        rating: 4.5,
-        cuisine: 'asian',
-      },
-    }
+  props: {
+    restaurant: Object,
   },
 }
 </script>
+
+<style>
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+</style>
