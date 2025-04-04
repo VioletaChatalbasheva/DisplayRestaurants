@@ -1,14 +1,19 @@
 <template>
   <div class="app">
-    <h1>Restaurant Finder</h1>
-    <PostcodeSelector @postcode-selected="fetchRestaurants" />
-
-    <div v-if="loading">Loading...</div>
-    <div v-else-if="restaurants.length">
-      <RestaurantList :restaurants="restaurants" />
+    <div ref="header" class="header-column">
+      <img class="logo" src="@/assets/images/just-eat-logo.png" alt="Just Eat Takeaway Logo" />
+      <h1>Restaurant Finder</h1>
+      <PostcodeSelector @postcode-selected="fetchRestaurants" />
     </div>
-    <div v-else-if="selectedPostcode">
-      <p>No restaurants found.</p>
+
+    <div class="content">
+      <div v-if="loading">Loading...</div>
+      <div v-else-if="restaurants.length">
+        <RestaurantList :restaurants="restaurants" />
+      </div>
+      <div v-else-if="selectedPostcode">
+        <p>No restaurants found.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +33,13 @@ export default {
       loading: false,
       selectedPostcode: null,
     }
+  },
+  mounted() {
+    // After the component mounts, measure the header height
+    const headerHeight = this.$refs.header.offsetHeight
+    console.log('Header height:', headerHeight)
+    // Set a CSS variable on the root element
+    document.documentElement.style.setProperty('--header-height', headerHeight + 'px')
   },
   methods: {
     async fetchRestaurants(postcode) {
@@ -68,13 +80,34 @@ export default {
 
 <style>
 body {
-  font-family: sans-serif;
-  margin: 2rem;
-  background: #f7f7f7;
+  margin: 0;
+  padding: 0;
 }
 
-.app {
+.header-column {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 1rem;
+  z-index: 9999;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logo {
+  max-height: 60px;
+  margin-bottom: 1rem;
+}
+
+.content {
+  margin-top: var(--header-height);
   max-width: 700px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
