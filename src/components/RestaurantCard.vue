@@ -2,16 +2,17 @@
   <div class="card">
     <h2>{{ restaurant.name }}</h2>
     <p><span style="font-weight: bold">Cuisines:</span> {{ restaurant.cuisines }}</p>
+    <p><span style="font-weight: bold">Address:</span> {{ restaurant.address }}</p>
     <p>
       <span style="font-weight: bold">Rating:</span>
       {{ restaurant.rating }}
       <img
+        v-if="restaurant.rating >= 3"
         src="@/assets/images/star_jet.jpg"
         alt="star"
-        style="width: 30px; height: 30px; vertical-align: middle; margin-bottom: 5px"
+        style="width: 20px; height: 20px; vertical-align: middle; margin-bottom: 4px"
       />
     </p>
-    <p><span style="font-weight: bold">Address:</span> {{ restaurant.address }}</p>
   </div>
 </template>
 
@@ -25,12 +26,11 @@ export default {
 
 <style>
 .card {
-  background: #fff;
   border: 1px solid #ff6600;
   border-radius: 8px;
+  border-width: 2px;
   padding: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
   margin-bottom: 1rem;
 }
 
@@ -40,11 +40,12 @@ export default {
 
 .card h2 {
   color: #ff6600;
-  margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .card p {
-  margin: 0.25rem 0;
+  margin: 0.5rem 0;
   color: #333;
+  margin-bottom: 0;
 }
 </style>

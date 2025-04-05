@@ -1,9 +1,9 @@
 <template>
   <div class="app">
-    <div ref="header" class="header-column">
+    <div class="header-column">
       <img class="logo" src="@/assets/images/just-eat-logo.png" alt="Just Eat Takeaway Logo" />
-      <h1>Restaurant Finder</h1>
-      <PostcodeSelector @postcode-selected="fetchRestaurants" />
+      <h1>Search for Restaurants:</h1>
+      <PostcodeSelector class="postcode-selector" @postcode-selected="fetchRestaurants" />
     </div>
 
     <div class="content">
@@ -33,13 +33,6 @@ export default {
       loading: false,
       selectedPostcode: null,
     }
-  },
-  mounted() {
-    // After the component mounts, measure the header height
-    const headerHeight = this.$refs.header.offsetHeight
-    console.log('Header height:', headerHeight)
-    // Set a CSS variable on the root element
-    document.documentElement.style.setProperty('--header-height', headerHeight + 'px')
   },
   methods: {
     async fetchRestaurants(postcode) {
@@ -81,22 +74,18 @@ export default {
 <style>
 body {
   margin: 0;
-  padding: 0;
+  padding: 2rem 0 0 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-column {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  padding: 1rem;
-  z-index: 9999;
-  width: 100%;
-  box-sizing: border-box;
+  text-align: center;
 }
 
 .logo {
@@ -104,10 +93,19 @@ body {
   margin-bottom: 1rem;
 }
 
-.content {
-  margin-top: var(--header-height);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+.postcode-selector {
+  align-items: center;
+}
+
+.postcode-selector select {
+  border: 1px solid #ff6600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.postcode-selector select:focus,
+.postcode-selector select:active {
+  outline: none;
+  border-color: #ff6600;
 }
 </style>
