@@ -5,7 +5,12 @@ A web application for viewing and managing restaurant information.
 ## Features
 
 - Display list of the first 10 restaurants
-- View restaurant details
+- View restaurant details in a card-type layout:
+   - The name of the restaurant is displayed on top of the card
+   - The cuisines per restaurant
+   - The address of the restaurant (street, city)
+   - The rating of the restaurant (if the rating is higher than 3, a golden star is displayed)
+
 
 ## Technologies
 
